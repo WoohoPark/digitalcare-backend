@@ -1,0 +1,195 @@
+COMM
+type	: area
+서울		:0100
+부산		:0200
+대구		:0300
+인천		:0400
+광주		:0500
+대전		:0600
+울산		:0700
+세종		:0800
+경기		:0900
+경남		:1000
+경북		:1100
+충남		:1200
+충북		:1300
+전남		:1400
+전북		:1500
+강원		:1600
+제주		:1700
+
+type 	: yn
+Yes 	: 00
+No		: 99
+
+type	: req
+팀매칭요청	: TM
+
+User
+사용자 	: userId
+사용자명	: aka
+패스워드	: password
+키		: height 몸무게		: weight
+공개여부 	: healthPublicYn
+나이		: age
+사용자명 	: name
+휴대폰번호	: phoneNum
+활동지역	: userArea
+가입날짜	: userRegDate
+수정날짜	: userUdtDate
+
+CREATE TABLE `tb_user` (
+	`userId` INT(11) NOT NULL AUTO_INCREMENT,
+	`aka` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`password` INT(11) NULL DEFAULT NULL,
+	`height` INT(11) NULL DEFAULT NULL,
+	`weight` INT(11) NULL DEFAULT NULL,
+	`age` INT(11) NULL DEFAULT NULL,
+	`name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`phone` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`userArea` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`userRegDate` DATETIME NULL DEFAULT NULL,
+	`userUdtDate` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`userId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+Team
+팀아이디		: teamId
+팀명			: teamName
+팀아이콘		: teamIcon
+팀방명록		: teamReview
+공개모집 		: teamPublicYn
+팀 소개		: teamIntro
+팀생성일자		: teamRegDate
+활동지역		: teamArea
+//팀복인증샷		: O
+
+CREATE TABLE `tb_team` (
+	`teamId` INT(11) NOT NULL AUTO_INCREMENT,
+	`teamName` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`teamIcon` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`teamPublicYn` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`teamIntro` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`teamArea` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`teamRegDate` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`teamId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+
+;
+
+MEMBER
+팀아이디		: teamId
+팀원			: userId
+팀장여부		: leader
+부팀장여부	: subLeader
+팀원여부		: memberYn
+팀가입일		: joinDate
+
+CREATE TABLE `tb_member` (
+	`teamId` INT(11) NOT NULL,
+	`userId` INT(11) NOT NULL,
+	`leaderYn` INT(11) NOT NULL,
+	`subLeaderYn` INT(11) NOT NULL,
+	`memberYn` INT(11) NOT NULL,
+	`joinDate` DATETIME NOT NULL,
+	`joinMemo` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reqDate` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`teamId`, `userId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+Match
+매치아이디		: matchId
+매치날짜		    : matchDay
+매치시간		    : matchTime
+매칭시도		    : matchTry
+매칭여부		    : matchYn
+매칭Home팀		: matchHomeId
+매칭Away팀		: matchAwayId
+
+CREATE TABLE `tb_match` (
+	`matchId` INT(11) NOT NULL AUTO_INCREMENT,
+	`matchDay` DATETIME NULL DEFAULT NULL,
+	`matchTry` INT(11) NULL DEFAULT NULL,
+	`matchYn` INT(11) NULL DEFAULT NULL,
+	`matchHomeId` INT(11) NULL DEFAULT NULL,
+	`matchAwayId` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`matchId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+tb_req
+
+매칭 요청 테이블
+
+CREATE TABLE `tb_req` (
+	`matchId` INT(11) NULL DEFAULT NULL,
+	`reqTeamId` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`regDate` DATETIME NULL DEFAULT NULL,
+	`type` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+Score
+매치번호	: matchId
+팀명		: teamId
+승리		: win
+무승부		: draw
+패배		: lose
+
+CREATE TABLE `tb_score` (
+	`matchId` INT(11) NULL DEFAULT NULL,
+	`teamId` INT(11) NULL DEFAULT NULL,
+	`win` INT(11) NULL DEFAULT NULL,
+	`draw` INT(11) NULL DEFAULT NULL,
+	`lose` INT(11) NULL DEFAULT NULL
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+Review
+
+CREATE TABLE `tb_review` (
+	`teamId` INT(11) NULL DEFAULT NULL,
+	`userId` INT(11) NULL DEFAULT NULL,
+	`content` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`regDate` DATETIME NULL DEFAULT NULL,
+	`reviewId` INT(11) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`reviewId`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+
+tb_message
+
+수신자		:
+발신자		:
+날짜		:
+메모		:
+
+
+
+팀/ 매치/  커뮤/ 마이/
+매치
+일정/
