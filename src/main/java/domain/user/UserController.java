@@ -4,6 +4,8 @@ import domain.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -12,8 +14,9 @@ public class UserController {
     UserService userService;
 
     @RequestMapping( "/hello")
-    public String hello() {
-        return "Hello World";
+    public void hello() throws Exception{
+        System.out.println("##############push start################");
+        System.out.println("##############push close################");
     }
 
     @PostMapping("/join")

@@ -45,6 +45,7 @@ public class SecurityConfiture extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/api/jwt/**").permitAll()
+				.antMatchers("/api/push/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.sessionManagement()

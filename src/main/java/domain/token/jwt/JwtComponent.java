@@ -243,12 +243,12 @@ public class JwtComponent {
 	public Jwt makeJwt( String username, String password) throws CommonException {
 		
 		try {
-			/*this.authenticationManager
+			this.authenticationManager
 					.authenticate( 
 						new UsernamePasswordAuthenticationToken( 
 								username, 
 								password));
-			final UserDetails user = myUserDetailService.loadUserByUsername( username);*/
+			final UserDetails user = myUserDetailService.loadUserByUsername( username);
 			final Jwt jwt = this.generateToken(user);
 			
 			return jwt;
